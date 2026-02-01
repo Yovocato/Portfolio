@@ -1,81 +1,71 @@
-let isMenuOpen = false;
+const menuBtn = document.getElementById('mobileMenuBtn');
+const mobileSidebar = document.getElementById('mobileSidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const menuIcon = document.getElementById('menuIcon');
+const sidebarLinks = document.querySelectorAll('#mobileSidebar a');
 
-function initMobileMenu() {
-  const menuBtn = document.getElementById('mobileMenuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuIcon = document.getElementById('menuIcon');
-  const menuLinks = mobileMenu?.querySelectorAll('a');
+let isSidebarOpen = false;
 
-  if (!menuBtn || !mobileMenu) return;
+// Toggle sidebar
+function toggleSidebar() {
+  isSidebarOpen = !isSidebarOpen;
+  
+  if (isSidebarOpen) {
+    mobileSidebar.classList.remove('hidden');
+    sidebarOverlay.classList.remove('hidden');
+    setTimeout(() => {
+      mobileSidebar.classList.remove('translate-x-full');
+      sidebarOverlay.classList.add('opacity-100');
+    }, 0);
+    menuIcon.textContent = '✕';
+  } else {
+    mobileSidebar.classList.add('translate-x-full');
+    sidebarOverlay.classList.add('opacity-0');
+    menuIcon.textContent = '≡';
+    setTimeout(() => {
+      mobileSidebar.classList.add('hidden');
+      sidebarOverlay.classList.add('hidden');
+      sidebarOverlay.classList.remove('opacity-0');
+    }, 300);
+  }
+}
 
-  // Toggle menu on button click
+// Menu button click
+if (menuBtn) {
   menuBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    isMenuOpen = !isMenuOpen;
-    
-    if (isMenuOpen) {
-      mobileMenu.classList.remove('hidden');
-      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
-      menuIcon.textContent = '✕';
-    } else {
-      mobileMenu.style.maxHeight = '0';
-      menuIcon.textContent = '≡';
-      setTimeout(() => {
-        mobileMenu.classList.add('hidden');
-      }, 300);
-    }
+    toggleSidebar();
   });
+}
 
-  // Close menu when clicking a link
-  menuLinks?.forEach(link => {
-    link.addEventListener('click', () => {
-      isMenuOpen = false;
-      mobileMenu.style.maxHeight = '0';
-      menuIcon.textContent = '≡';
-      setTimeout(() => {
-        mobileMenu.classList.add('hidden');
-      }, 300);
-    });
+// Close sidebar when clicking a link
+sidebarLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    isSidebarOpen = true;
+    toggleSidebar();
   });
+});
 
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-      isMenuOpen = false;
-      mobileMenu.style.maxHeight = '0';
-      menuIcon.textContent = '≡';
-      setTimeout(() => {
-        mobileMenu.classList.add('hidden');
-      }, 300);
+// Close sidebar when clicking overlay
+if (sidebarOverlay) {
+  sidebarOverlay.addEventListener('click', () => {
+    if (isSidebarOpen) {
+      isSidebarOpen = true;
+      toggleSidebar();
     }
   });
 }
 
-// Smooth scrolling for anchor links
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   });
-}
-
-// Initialize when DOM is ready
-function init() {
-  initMobileMenu();
-  initSmoothScroll();
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+});

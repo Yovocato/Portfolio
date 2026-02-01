@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="/src/style.css" rel="stylesheet">
   <link rel="icon" href="/assets/icon/avocado-svgrepo-com.svg">
-  <script src="/src/main.js"></script>
   <title>Get to Know Me</title>
 </head>
 
@@ -34,18 +33,21 @@
           <span id="menuIcon">≡</span>
         </button>
       </div>
-
-      <!-- Mobile Menu (Expandable) -->
-      <div id="mobileMenu" class="hidden md:hidden max-h-0 overflow-hidden transition-all duration-300">
-        <div class="px-4 py-4 space-y-2 border-t border-white/10">
-          <a href="#about" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">About Me</a>
-          <a href="#skills" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Tech Stack</a>
-          <a href="#projects" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Projects</a>
-          <a href="#contact" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Contact</a>
-        </div>
-      </div>
     </div>
   </nav>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 md:hidden z-30"></div>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobileSidebar" class="hidden fixed right-0 top-0 h-screen w-64 bg-slate-900 border-l border-white/10 md:hidden z-40 transform translate-x-full transition-transform duration-300">
+    <div class="pt-20 px-4 space-y-2">
+      <a href="#about" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">About Me</a>
+      <a href="#skills" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Tech Stack</a>
+      <a href="#projects" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Projects</a>
+      <a href="#contact" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Contact</a>
+    </div>
+  </div>
 
   <!-- HERO SECTION -->
   <section id="about" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
@@ -642,6 +644,7 @@
     </div>
   </footer>
 
+  <script src="/src/main.js"></script>
 </body>
 
 </html>
