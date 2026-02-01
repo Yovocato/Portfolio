@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-slideIn {
+    animation: slideIn 0.8s ease-out forwards;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: blob 7s infinite;
+}
+
+@keyframes blob {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Projects Scroll Enhancements ─── */
+
+    .projects-track {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 1.5rem 0 2.5rem;
+      cursor: grab;
+      user-select: none;
+    }
+    .projects-track.dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
+    }
+    .projects-track::-webkit-scrollbar {
+      height: 0;
+    }
+    .projects-track {
+      scrollbar-width: none;
+    }
+
+    /* ─── Card entrance animation ─── */
+    .project-card {
+      flex-shrink: 0;
+      width: 20rem;
+      scroll-snap-align: center;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 0.6s cubic-bezier(.22,1,.36,1),
+                  transform 0.6s cubic-bezier(.22,1,.36,1),
+                  background-color 0.3s ease;
+      will-change: transform, opacity;
+    }
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    /* stagger delay set via inline style in JS */
+
+    /* ─── Arrow buttons ─── */
+    .scroll-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: rgba(15,23,42,.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s, opacity 0.3s;
+      opacity: 0.7;
+    }
+    .scroll-arrow:hover {
+      background: rgba(139,92,246,.6);
+      opacity: 1;
+      transform: translateY(-50%) scale(1.08);
+    }
+    .scroll-arrow.prev { left: -1.5rem; }
+    .scroll-arrow.next { right: -1.5rem; }
+    .scroll-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* ─── Dot indicators ─── */
+    .scroll-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .scroll-dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 9999px;
+      background: rgba(255,255,255,.25);
+      transition: background 0.35s, width 0.35s, box-shadow 0.35s;
+      cursor: pointer;
+    }
+    .scroll-dot.active {
+      width: 1.75rem;
+      background: linear-gradient(90deg, #7c3aed, #3b82f6);
+      box-shadow: 0 0 8px rgba(124,58,237,.5);
+    }
+
+    /* ─── Edge fade masks ─── */
+    .projects-viewport {
+      position: relative;
+      overflow: hidden;
+    }
+    .projects-viewport::before,
+    .projects-viewport::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4rem;
+      z-index: 5;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    .projects-viewport::before {
+      left: 0;
+      background: linear-gradient(to right, #0f172a, transparent);
+      opacity: 0;
+    }
+    .projects-viewport::after {
+      right: 0;
+      background: linear-gradient(to left, #0f172a, transparent);
+      opacity: 1;
+    }
+    .projects-viewport.show-left::before  { opacity: 1; }
+    .projects-viewport.hide-right::after  { opacity: 0; }
