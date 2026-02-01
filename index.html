@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="/src/style.css" rel="stylesheet">
   <link rel="icon" href="/assets/icon/avocado-svgrepo-com.svg">
-  <title>Get to Know Me</title>
   <script type="module" src="/src/main.js" defer></script>
+  <title>Get to Know Me</title>
 </head>
 
 <body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
@@ -29,26 +29,28 @@
           <li><a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors">Contact</a></li>
         </ul>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobileMenuBtn" class="md:hidden text-white text-2xl focus:outline-none hover:text-purple-400 transition-colors">
-          <span id="menuIcon">≡</span>
+        <!-- Mobile Hamburger -->
+        <button class="md:hidden text-white text-2xl focus:outline-none hover:text-purple-400 transition-colors"
+          onclick="toggleMenu()">
+          <span id="hamburger">☰</span>
         </button>
       </div>
     </div>
-  </nav>
 
-  <!-- Mobile Sidebar Overlay -->
-  <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 md:hidden z-30"></div>
-
-  <!-- Mobile Sidebar -->
-  <div id="mobileSidebar" class="hidden fixed right-0 top-0 h-screen w-64 bg-slate-900 border-l border-white/10 md:hidden z-40 transform translate-x-full transition-transform duration-300">
-    <div class="pt-20 px-4 space-y-2">
-      <a href="#about" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">About Me</a>
-      <a href="#skills" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Tech Stack</a>
-      <a href="#projects" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Projects</a>
-      <a href="#contact" class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-all">Contact</a>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden glass-effect border-t border-white/10">
+      <div class="px-4 py-4 space-y-3">
+        <a href="#about"
+          class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-lg transition-all">About Me</a>
+        <a href="#skills"
+          class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-lg transition-all">Skills</a>
+        <a href="#projects"
+          class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-lg transition-all">Projects</a>
+        <a href="#contact"
+          class="block text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-lg transition-all">Contact</a>
+      </div>
     </div>
-  </div>
+  </nav>
 
   <!-- HERO SECTION -->
   <section id="about" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
